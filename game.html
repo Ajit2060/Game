@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Click Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 50px;
+    }
+    #gameButton {
+      padding: 20px 40px;
+      font-size: 24px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #gameButton:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Click the Button Game</h1>
+  <p>Time Left: <span id="time">10</span> seconds</p>
+  <p>Score: <span id="score">0</span></p>
+
+  <button id="gameButton" disabled>Click Me!</button><br><br>
+  <button onclick="startGame()">Start Game</button>
+
+  <script>
+    let time = 10;
+    let score = 0;
+    let timer;
+
+    const timeDisplay = document.getElementById("time");
+    const scoreDisplay = document.getElementById("score");
+    const gameButton = document.getElementById("gameButton");
+
+    gameButton.addEventListener("click", () => {
+      score++;
+      scoreDisplay.textContent = score;
+    });
+
+    function startGame() {
+      time = 10;
+      score = 0;
+      timeDisplay.textContent = time;
+      scoreDisplay.textContent = score;
+      gameButton.disabled = false;
+
+      timer = setInterval(() => {
+        time--;
+        timeDisplay.textContent = time;
+        if (time <= 0) {
+          clearInterval(timer);
+          gameButton.disabled = true;
+          alert("Time's up! Your score: " + score);
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
